@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 from torch.utils.data.dataloader import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from mlp import MLP
-from help import generate,print_samples,evaluate
+from helpers import generate,print_samples,evaluate
 
 
 
