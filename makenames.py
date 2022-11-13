@@ -170,21 +170,6 @@ if __name__ == '__main__':
         if step % 10 == 0:
             print(f"step {step} | loss {loss.item():.4f} | step time {(t1-t0)*1000:.2f}ms")
 
-        # evaluate the model
-        if step > 0 and step % 500 == 0:
-            train_loss = evaluate(model, train_dataset, batch_size=100, max_batches=10)
-            test_loss  = evaluate(model, test_dataset,  batch_size=100, max_batches=10)
-            writer.add_scalar("Loss/train", train_loss, step)
-            writer.add_scalar("Loss/test", test_loss, step)
-            writer.flush()
-            print(f"step {step} train loss: {train_loss} test loss: {test_loss}")
-            # save the model to disk if it has improved
-            if best_loss is None or test_loss < best_loss:
-                out_path = os.path.join(work_dir, "model.pt")
-                print(f"test loss {test_loss} is the best so far, saving model to {out_path}")
-                torch.save(model.state_dict(), out_path)
-                best_loss = test_loss
-
         # sample from the model
         if step > 0 and step % 200 == 0:
             print_samples(model, train_dataset,test_dataset,num = 10)
